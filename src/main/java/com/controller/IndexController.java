@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class Hello {
+public class IndexController {
     @GetMapping(value = "/")
     public String Index(){
         return "index";
