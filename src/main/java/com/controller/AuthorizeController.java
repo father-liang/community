@@ -2,6 +2,8 @@ package com.controller;
 
 import com.dto.AccessTokenDTO;
 import com.dto.GithubUser;
+import com.mapper.UserMapper;
+import com.model.User;
 import com.provider.GithubProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 
 @Controller
@@ -27,6 +30,9 @@ public class AuthorizeController {
     @Value("${github.redirect.uri}")
     private String redirectUri;
 
+    @Resource
+    private UserMapper userMapper;
+
     @RequestMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
@@ -39,10 +45,17 @@ public class AuthorizeController {
         accessTokenDTO.setClient_secret(clientSecret);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
 
-        GithubUser user = githubProvider.getUser(accessToken);
-        System.out.println(user);
+        GithubUser githubUser = githubProvider.getUser(accessToken);
+        System.out.println(githubUser);
 
-        if (user != null) {
+        if (githubUser != null) {
+            User user = new User();
+            user.setToken(UUID.randomUUID().toString());
+            user.setName(githubUser.getName());
+            user.setAccountId(String.valueOf(githubUser.getId()));
+            user.setGmtCreate(System.currentTimeMillis());
+            user.setGmtModified(user.getGmtCreate());
+            userMapper.insert(user);
             //登录成功，将请求得到的对象放入到session中
             httpServletRequest.getSession().setAttribute("user", user);
             //重定向回index页面
