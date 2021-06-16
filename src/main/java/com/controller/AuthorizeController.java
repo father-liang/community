@@ -60,7 +60,7 @@ public class AuthorizeController {
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             userMapper.insert(user);
-            //登录成功，将请求得到的对象放入到session中
+            //登录成功，将请求得到的对象放入到Cookie中，返回给前端页面一个token
             httpServletResponse.addCookie(new Cookie("token", token));
             httpServletRequest.getSession().setAttribute("user", user);
             //重定向回index页面
