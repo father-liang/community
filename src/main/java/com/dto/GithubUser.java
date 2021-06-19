@@ -8,4 +8,5 @@ public class GithubUser {
     private Long id;
     //bio是用户描述
     private String bio;
+    private String avatar_url;
 }
