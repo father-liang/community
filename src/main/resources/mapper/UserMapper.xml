@@ -12,4 +12,7 @@
         select * from user where token = #{token}
     </select>
 
+    <select id="findById" resultType="com.model.User">
+        select * from user where id = #{id}
+    </select>
 </mapper>
