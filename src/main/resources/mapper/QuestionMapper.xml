@@ -9,7 +9,7 @@
     </insert>
 
     <select id="list" resultType="com.model.Question">
-        select * from question
+        select * from question limit #{offset},#{size}
     </select>
 
 </mapper>
