@@ -5,6 +5,7 @@ import com.dto.GithubUser;
 import com.mapper.UserMapper;
 import com.model.User;
 import com.provider.GithubProvider;
+import com.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,9 @@ public class AuthorizeController {
     @Resource
     private UserMapper userMapper;
 
+    @Resource
+    private UserService userService;
+
     @RequestMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
@@ -60,7 +64,7 @@ public class AuthorizeController {
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             user.setAvatarUrl(githubUser.getAvatar_url());
-            userMapper.insert(user);
+            userService.createOrUpdate(user);
             //登录成功，将请求得到的对象放入到Cookie中，返回给前端页面一个token
             httpServletResponse.addCookie(new Cookie("token", token));
             httpServletRequest.getSession().setAttribute("user", user);
