@@ -8,6 +8,7 @@ import com.provider.GithubProvider;
 import com.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,9 +35,6 @@ public class AuthorizeController {
     private String redirectUri;
 
     @Resource
-    private UserMapper userMapper;
-
-    @Resource
     private UserService userService;
 
     @RequestMapping("/callback")
@@ -61,8 +59,6 @@ public class AuthorizeController {
             user.setToken(token);
             user.setName(githubUser.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
-            user.setGmtCreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtCreate());
             user.setAvatarUrl(githubUser.getAvatar_url());
             userService.createOrUpdate(user);
             //登录成功，将请求得到的对象放入到Cookie中，返回给前端页面一个token
@@ -75,6 +71,17 @@ public class AuthorizeController {
             return "redirect:/";
         }
 
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,
+                         HttpServletResponse response){
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        return "redirect:/";
     }
 
 

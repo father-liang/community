@@ -1,6 +1,7 @@
 package com.service;
 
 import com.mapper.UserMapper;
+import com.model.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,4 +12,22 @@ public class UserService {
     private UserMapper userMapper;
 
 
+    public void createOrUpdate(User user) {
+       User dbUser = userMapper.findByAccountId(user.getAccountId());
+       if(dbUser == null){
+           //插入
+           user.setGmtCreate(System.currentTimeMillis());
+           user.setGmtModified(user.getGmtCreate());
+           userMapper.insert(user);
+       }else {
+           //修改
+           dbUser.setGmtModified(System.currentTimeMillis());
+           dbUser.setAvatarUrl(user.getAvatarUrl());
+           dbUser.setName(user.getName());
+           dbUser.setToken(user.getToken());
+           userMapper.update(dbUser);
+
+       }
+
+    }
 }
