@@ -1,22 +1,33 @@
 package com.mapper;
 
 import com.model.User;
-import org.apache.ibatis.annotations.Mapper;
+import com.model.UserExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.session.RowBounds;
 
-@Mapper
 public interface UserMapper {
-    public void insert(User user);
+    long countByExample(UserExample example);
 
-    User findByToken(String token);
+    int deleteByExample(UserExample example);
 
-    User findById(Integer id);
+    int deleteByPrimaryKey(Integer id);
 
-    @Select("select * from user where account_id = ${accountId}")
-    User findByAccountId(@Param("accountId") String accountId);
+    int insert(User record);
 
-    @Update("update user set name=#{name}, token=#{token}, gmt_modified=#{gmtModified}, avatar_url=#{avatarUrl} where id=#{id}")
-    void update(User user);
+    int insertSelective(User record);
+
+    List<User> selectByExampleWithRowbounds(UserExample example, RowBounds rowBounds);
+
+    List<User> selectByExample(UserExample example);
+
+    User selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByExample(@Param("record") User record, @Param("example") UserExample example);
+
+    int updateByPrimaryKeySelective(User record);
+
+    int updateByPrimaryKey(User record);
 }
