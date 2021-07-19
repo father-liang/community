@@ -4,7 +4,7 @@ public class CustomizeException extends RuntimeException{
     private String message;
 
     public CustomizeException(ICustomizeErrorCode errorCode) {
-        this.message = errorCode.message;
+        this.message = errorCode.getMessage();
     }
 
     public CustomizeException(String message) {
