@@ -2,6 +2,7 @@ package com.controller;
 
 import com.dto.CommentDTO;
 import com.dto.ResultDTO;
+import com.exception.CustomizeErrorCode;
 import com.model.Comment;
 import com.model.User;
 import com.service.CommentService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 
 @Controller
 public class CommentController {
@@ -27,7 +29,7 @@ public class CommentController {
 
         User user = (User) request.getSession().getAttribute("user");
         if (user == null){
-            return ResultDTO.errorOf(2002, "未登录不能进行评论，请先登录");
+            return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
 
         Comment comment = new Comment();
@@ -42,6 +44,6 @@ public class CommentController {
 
         commentService.insert(comment);
 
-        return null;
+        return ResultDTO.okOf();
     }
 }
