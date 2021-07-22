@@ -6,6 +6,7 @@ import com.exception.CustomizeException;
 import com.mapper.CommentMapper;
 import com.mapper.QuestionMapper;
 import com.model.Comment;
+import com.model.Question;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,8 +36,13 @@ public class CommentService {
             }
             commentMapper.insert(comment);
         }else {
-            questionMapper.selectByPrimaryKey(comment.getParentId());
             //回复问题
+            Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
+            if(question == null){
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
+            commentMapper.insert(comment);
+
         }
     }
 }

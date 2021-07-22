@@ -1,7 +1,6 @@
 package com.controller;
 
 import com.dto.QuestionDTO;
-import com.mapper.QuestionMapper;
 import com.model.Question;
 import com.model.User;
 import com.service.QuestionService;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.Resource;
-import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -22,7 +20,7 @@ public class PublishController {
     private QuestionService questionService;
 
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable(name = "id") Integer id,
+    public String edit(@PathVariable(name = "id") Long id,
                        Model model){
 
         QuestionDTO question = questionService.getById(id);

@@ -1,7 +1,5 @@
 package com.model;
 
-import com.mapper.CommentMapper;
-
 public class Comment {
     private Long id;
 
@@ -9,7 +7,7 @@ public class Comment {
 
     private Integer type;
 
-    private Integer commentator;
+    private Long commentator;
 
     private Long gmtCreate;
 
@@ -43,11 +41,11 @@ public class Comment {
         this.type = type;
     }
 
-    public Integer getCommentator() {
+    public Long getCommentator() {
         return commentator;
     }
 
-    public void setCommentator(Integer commentator) {
+    public void setCommentator(Long commentator) {
         this.commentator = commentator;
     }
 
