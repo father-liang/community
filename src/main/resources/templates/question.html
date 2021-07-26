@@ -35,10 +35,10 @@
             </div>
 
             <!--回复-->
-            <h3>
+            <h4>
                 <span th:text="${question.commentCount}"></span> 个回复
-            </h3>
-            <hr class="col-ld-12 col-md-12 col-sm-12 col-xs-12">
+            </h4>
+            <hr class="col-ld-12 col-md-12 col-sm-12 col-xs-12 comment-sp">
             <div class="col-ld-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="media">
                     <div class="media-left">
@@ -51,8 +51,10 @@
                         <h5 class="media-heading">
                             <span th:text="${question.user.name}"></span>
                         </h5>
+                        <div>我是回复内容</div>
                     </div>
                 </div>
+
 
             </div>
 
