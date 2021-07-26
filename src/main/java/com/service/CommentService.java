@@ -4,10 +4,12 @@ import com.enums.CommentTypeEnum;
 import com.exception.CustomizeErrorCode;
 import com.exception.CustomizeException;
 import com.mapper.CommentMapper;
+import com.mapper.QuestionExtMapper;
 import com.mapper.QuestionMapper;
 import com.model.Comment;
 import com.model.Question;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -17,8 +19,10 @@ public class CommentService {
     private CommentMapper commentMapper;
     @Resource
     private QuestionMapper questionMapper;
+    @Resource
+    private QuestionExtMapper questionExtMapper;
 
-
+    @Transactional
     public void insert(Comment comment) {
         if (comment.getParentId() == null || comment.getParentId() == 0) {
             throw new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOT_FOUND);
@@ -42,6 +46,8 @@ public class CommentService {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
             commentMapper.insert(comment);
+            question.setCommentCount(1);
+            questionExtMapper.incCommentCount(question);
 
         }
     }

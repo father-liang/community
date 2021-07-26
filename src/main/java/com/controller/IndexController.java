@@ -23,7 +23,7 @@ public class IndexController {
                         @RequestParam(name = "size", defaultValue = "5") Integer size) {
 
         //questionDTO不仅有question的信息，还有发布人的user的信息
-        PaginationDTO pagination = questionService.list(page, size);
+          PaginationDTO pagination = questionService.list(page, size);
 
         model.addAttribute("pagination", pagination);
 

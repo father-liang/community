@@ -1,5 +1,8 @@
 package com.interceptor;
 
+import com.mapper.UserMapper;
+import com.model.User;
+import com.model.UserExample;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
