@@ -66,6 +66,10 @@
     cursor: pointer;
 }
 
+.menu .active {
+    color: #499ef3;
+}
+
 .menu .icon:hover {
     color: #499ef3;
 }
@@ -76,6 +80,13 @@
     border-bottom: 1px solid #eee;
 }
 
-.question-title{
+.question-title {
     margin-top: 25px;
+}
+
+.sub-comments {
+    border-radius: 15px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+    padding-top: 15px;
 }
