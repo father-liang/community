@@ -54,7 +54,7 @@
         <!--tableName表示你的数据库表，domainObjectName这个表示你要生成的对应的java类的名字-->
         <table tableName="comment" domainObjectName="Comment"/>
 <!--        <table tableName="user" domainObjectName="User"/>-->
-        <table tableName="question" domainObjectName="Question"/>
+<!--        <table tableName="question" domainObjectName="Question"/>-->
 
 
     </context>

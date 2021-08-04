@@ -17,6 +17,8 @@ public class Comment {
 
     private Long likeCount;
 
+    private Integer commentCount;
+
     public Long getId() {
         return id;
     }
@@ -79,5 +81,13 @@ public class Comment {
 
     public void setLikeCount(Long likeCount) {
         this.likeCount = likeCount;
+    }
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
     }
 }
