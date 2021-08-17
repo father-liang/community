@@ -5,6 +5,7 @@ import com.dto.GithubUser;
 import com.model.User;
 import com.provider.GithubProvider;
 import com.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import java.util.UUID;
 
 
 @Controller
+@Slf4j
 public class AuthorizeController {
 
     @Resource
@@ -66,6 +68,7 @@ public class AuthorizeController {
             //重定向回index页面
             return "redirect:/";
         } else {
+            log.error("callback get github error, {}", githubUser);
             //登录失败，重新登录
             return "redirect:/";
         }

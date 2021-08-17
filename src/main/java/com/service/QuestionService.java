@@ -2,6 +2,7 @@ package com.service;
 
 import com.dto.PaginationDTO;
 import com.dto.QuestionDTO;
+import com.dto.QuestionQueryDTO;
 import com.exception.CustomizeErrorCode;
 import com.exception.CustomizeException;
 import com.mapper.QuestionExtMapper;
@@ -32,11 +33,21 @@ public class QuestionService {
     @Resource
     private QuestionExtMapper questionExtMapper;
 
-    public PaginationDTO list(Integer page, Integer size) {
+    public PaginationDTO list(String search, Integer page, Integer size) {
+
+
+        if (StringUtils.isNoneBlank(search)){
+            String[] splits = StringUtils.split(search, " ");
+            search = Arrays.stream(splits).collect(Collectors.joining("|"));
+        }
+
+
         PaginationDTO paginationDTO = new PaginationDTO();
 
         Integer totalPage;
-        Integer totalCount = (int) questionMapper.countByExample(new QuestionExample());
+        QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+        Integer totalCount = questionExtMapper.countBySearch(questionQueryDTO);
 
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
@@ -58,7 +69,10 @@ public class QuestionService {
 
         QuestionExample questionExample = new QuestionExample();
         questionExample.setOrderByClause("gmt_create desc");
-        List<Question> questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offset, size));
+
+        questionQueryDTO.setPage(offset);
+        questionQueryDTO.setSize(size);
+        List<Question> questions = questionExtMapper.selectBySearch(questionQueryDTO);
         ArrayList<QuestionDTO> questionDTOList = new ArrayList<>();
 
 
@@ -70,7 +84,7 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
 
 
         return paginationDTO;
@@ -117,7 +131,7 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
 
 
         return paginationDTO;

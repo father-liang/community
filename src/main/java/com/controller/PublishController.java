@@ -1,9 +1,11 @@
 package com.controller;
 
+import com.cache.TagCache;
 import com.dto.QuestionDTO;
 import com.model.Question;
 import com.model.User;
 import com.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,12 +30,14 @@ public class PublishController {
         model.addAttribute("description", question.getDescription());
         model.addAttribute("tag", question.getTag());
         model.addAttribute("id", question.getId());
+        model.addAttribute("tags", TagCache.get());
 
         return "publish";
     }
 
     @GetMapping(value = "/publish")
-    public String publish() {
+    public String publish(Model model) {
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
@@ -44,6 +48,7 @@ public class PublishController {
         model.addAttribute("title", question.getTitle());
         model.addAttribute("description", question.getDescription());
         model.addAttribute("tag", question.getTag());
+        model.addAttribute("tags", TagCache.get());
 
         if (question.getTitle() == null || question.getTitle() == "") {
             model.addAttribute("error", "标题不能为空");
@@ -57,6 +62,12 @@ public class PublishController {
 
         if (question.getTag() == null || question.getTag() == "") {
             model.addAttribute("error", "标签不能为空");
+            return "publish";
+        }
+
+        String invalid = TagCache.filterInvalid(question.getTag());
+        if (StringUtils.isNoneBlank(invalid)){
+            model.addAttribute("error", "输入非法标签:" + invalid);
             return "publish";
         }
 

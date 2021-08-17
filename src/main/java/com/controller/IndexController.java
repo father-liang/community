@@ -20,12 +20,14 @@ public class IndexController {
     public String Index(HttpServletRequest request,
                         Model model,
                         @RequestParam(name = "page", defaultValue = "1") Integer page,
-                        @RequestParam(name = "size", defaultValue = "5") Integer size) {
+                        @RequestParam(name = "size", defaultValue = "5") Integer size,
+                        @RequestParam(name = "search", required = false) String search) {
 
         //questionDTO不仅有question的信息，还有发布人的user的信息
-          PaginationDTO pagination = questionService.list(page, size);
+          PaginationDTO pagination = questionService.list(search, page, size);
 
-        model.addAttribute("pagination", pagination);
+         model.addAttribute("pagination", pagination);
+        model.addAttribute("search", search);
 
         return "index";
     }
