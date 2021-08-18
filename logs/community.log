@@ -1,1 +1,15 @@
-2021-08-17 08:57:14.400  WARN 8112 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9h14m25s623ms498µs600ns).
+2021-08-18 21:36:56.392  INFO 21124 --- [restartedMain] com.CommunityApplication                 : Starting CommunityApplication using Java 1.8.0_121 on LAPTOP-ECT3O5AM with PID 21124 (D:\Project\Java_Project\community\community\target\classes started by Himma in D:\Project\Java_Project\community\community)
+2021-08-18 21:36:56.398  INFO 21124 --- [restartedMain] com.CommunityApplication                 : No active profile set, falling back to default profiles: default
+2021-08-18 21:36:56.469  INFO 21124 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-08-18 21:36:56.470  INFO 21124 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-08-18 21:36:59.993  INFO 21124 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2021-08-18 21:37:00.006  INFO 21124 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-08-18 21:37:00.007  INFO 21124 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.46]
+2021-08-18 21:37:00.120  INFO 21124 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-08-18 21:37:00.120  INFO 21124 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3649 ms
+2021-08-18 21:37:01.535  INFO 21124 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-08-18 21:37:01.941  INFO 21124 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-08-18 21:37:01.998  INFO 21124 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2021-08-18 21:37:02.019  INFO 21124 --- [restartedMain] com.CommunityApplication                 : Started CommunityApplication in 6.188 seconds (JVM running for 7.281)
+2021-08-18 21:37:02.021  INFO 21124 --- [restartedMain] o.s.b.a.ApplicationAvailabilityBean      : Application availability state LivenessState changed to CORRECT
+2021-08-18 21:37:02.026  INFO 21124 --- [restartedMain] o.s.b.a.ApplicationAvailabilityBean      : Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
